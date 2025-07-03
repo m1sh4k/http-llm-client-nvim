@@ -1,24 +1,28 @@
 local M = {}
 
-function M.CreateCompletion(prompt)
-    local completions = require('vega.completions')
-    local pattern_code = "```.-```"
-    local to_insert = ''
+Completions = require('vega.completions')
+Config, Config = pcall(require, "Config")
+if not Config then
+   print('! no Config file found, using default')
+   Config = require('default_config')
+end
+
+function M.Completion(prompt)
+
     local client = vim.uv.new_tcp()
     if not client then
         error("Failed to create TCP client handle")
         return
     end
-    local host, port = "127.0.0.1", 9999
 --   
-    vim.uv.tcp_connect(client, host, port, function (error)
+    vim.uv.tcp_connect(client, Config.host, Config.port, function (error)
         if error then
             print("Connection error:", error)
             vim.uv.close(client)
             return
         end
     end)
-    local jsoned = completions.create_initial_message(string.sub(prompt, 2, -2))
+    local jsoned = Completions.create_initial_message(string.sub(prompt, 2, -2))
     --print('jsoned: ' .. jsoned)
     --[[vim.uv.write(client, jsoned, function (sending_error)
         if sending_error then
@@ -45,11 +49,35 @@ function M.CreateCompletion(prompt)
         end
 
     end)]]
-    local h = io.popen("curl -s http://localhost:9999/v1/chat/completions -H 'Content-Type: application/json' -d '" .. jsoned .. "'")
-    local response = h:read('*a')
-    h:close()
+    local h = io.popen("curl -s http://localhost:" .. tostring(Config.port) .. "/v1/chat/completions -H 'Content-Type: application/json' -d '" .. jsoned .. "'")
+    ---@type string
+    local response = h and h:read('*a')
+    if h then
+        pcall(h.close, h)  -- Safely attempt to close
+    end
+    return response
+end
+
+function M.CodeCompletion(prompt)
+    local response = M.Completion(prompt .. Config.code_extra_prompt)
+    local pattern_code = "```.-```"
+    --local to_insert = ''
+    if not response then
+        print('!no llm response!')
+        return
+    end
     local llm_answer = string.match(vim.json.decode(response)['choices'][1]['message']['content'], pattern_code):gsub("```$", ""):gsub("```.-\n", "")
---    print(response)
+    print(llm_answer)
+end
+
+function M.CreateCompletion(prompt)
+    local response = M.Completion(prompt)
+    if not response then
+        print('!no llm response!')
+        return
+    end
+
+    local llm_answer = vim.json.decode(response)['choices'][1]['message']['content']
     print(llm_answer)
 end
 
