@@ -1,10 +1,10 @@
 local M = {}
 
 Completions = require('vega.completions')
-Config_loaded_successfull, Config = pcall(require, "config")
+Config_loaded_successfull, Config = pcall(require, "vega.config")
 if not Config_loaded_successfull then
    print('! no Config file found, using default')
-   Config = require('default_config')
+   Config = require('vega.default_config')
 end
 
 function M.Completion(prompt)

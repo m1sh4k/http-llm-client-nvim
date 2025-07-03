@@ -12,18 +12,21 @@ Dependencies:
 - neovim (maybe vim instead of nvim, not tested)
 - lua
 
+
+To initialize plugin you need to run `lua/vega/init.lua`
+
 lazy.nvim simple setup example:
 
 ```lua
 {
     "m1sh4k/http-llm-client.nvim",
-    config = function() require("http-llm-client.nvim").setup() end
+    config = function() require("vega").setup() end
 },
 ```
 
 # Setup
 
-Plugin uses config file `config.lua` stored in root plugin directory (it does NOT exist after installation, you can start just from copying data from `default_config.lua` and then modifying) If importing `config.lua` throws errors *(e.g. file does not exist)*, plugin uses `default_config.lua` 
+Plugin uses config file `lua/vega/config.lua` (it does NOT exist after installation, you can start just from copying data from `lua/vega/default_config.lua` and then modifying) If importing `config.lua` throws errors *(e.g. file does not exist)*, plugin uses `default_config.lua` (path provided relative to the plugin root directory)
 
 
 # Usage
