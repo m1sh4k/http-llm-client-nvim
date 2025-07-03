@@ -49,7 +49,7 @@ function M.Completion(prompt)
         end
 
     end)]]
-    local h = io.popen("curl -s http://localhost:" .. tostring(Config.port) .. "/v1/chat/completions -H 'Content-Type: application/json' -d '" .. jsoned .. "'")
+    local h = io.popen("curl -s http://" .. Config.host ..":" .. tostring(Config.port) .. "/v1/chat/completions -H 'Content-Type: application/json' -d '" .. jsoned .. "'")
     ---@type string
     local response = h and h:read('*a')
     if h then
