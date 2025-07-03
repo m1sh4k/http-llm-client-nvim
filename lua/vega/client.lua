@@ -1,8 +1,8 @@
 local M = {}
 
 Completions = require('vega.completions')
-Config, Config = pcall(require, "Config")
-if not Config then
+Config_loaded_successfull, Config = pcall(require, "config")
+if not Config_loaded_successfull then
    print('! no Config file found, using default')
    Config = require('default_config')
 end
