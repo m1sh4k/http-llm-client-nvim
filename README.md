@@ -11,13 +11,11 @@ Dependencies:
 - lua
 
 
-To initialize plugin , `lua/vega/init.lua` setup must be ran at neovim startup (may be lazy).
-
 lazy.nvim simple setup example:
 
 ```lua
 {
-    "m1sh4k/http-llm-client.nvim",
+    "m1sh4k/http-llm-client-nvim",
     config = true
 },
 ```
