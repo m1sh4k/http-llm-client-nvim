@@ -1,7 +1,7 @@
 local M = {}
 
 -- modules loading
-Completions = require('vega.completions')
+Completions = require('http-llm-client-nvim.completions')
 Config_loaded_successfull, Config = pcall(require, "config.config")
 -- load config if exists else default config
 if not Config_loaded_successfull then

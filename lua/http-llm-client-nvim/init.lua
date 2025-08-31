@@ -1,8 +1,8 @@
 local M = {}
 
 -- load modules
-local client = require('vega.client')
-local managment = require('vega.managment')
+local client = require('http-llm-client-nvim.client')
+local managment = require('http-llm-client-nvim.managment')
 -- set commands
 function M.setup()
   vim.api.nvim_create_user_command('CodeCompletion', function(opts)
