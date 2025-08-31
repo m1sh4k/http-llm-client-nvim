@@ -7,7 +7,7 @@ Minimalistic neovim plugin written in pure lua that allows you to ask openai jso
 
 Dependencies:
 - curl (must be accessible with `curl` terminal command)
-- neovim (maybe vim instead of nvim, not tested)
+- neovim
 - lua
 
 
@@ -18,7 +18,7 @@ lazy.nvim simple setup example:
 ```lua
 {
     "m1sh4k/http-llm-client.nvim",
-    config = function() require("vega").setup() end
+    config = true
 },
 ```
 

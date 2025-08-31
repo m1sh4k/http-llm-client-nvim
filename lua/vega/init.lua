@@ -17,4 +17,6 @@ function M.setup()
 
 end
 
+-- run setup
+M.setup()
 return M
