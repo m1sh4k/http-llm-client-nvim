@@ -2,11 +2,11 @@ local M = {}
 
 -- modules loading
 Completions = require('vega.completions')
-Config_loaded_successfull, Config = pcall(require, "vega.config")
+Config_loaded_successfull, Config = pcall(require, "config.config")
 -- load config if exists else default config
 if not Config_loaded_successfull then
    print('! no Config file found, using default')
-   Config = require('vega.default_config')
+   Config = require('config.default_config')
 end
 
 function M.Completion(prompt) -- returns llm completion for given prompt 

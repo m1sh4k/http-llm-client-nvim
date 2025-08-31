@@ -24,7 +24,7 @@ lazy.nvim simple setup example:
 
 ## Initial configuration
 
-Plugin uses config file `lua/vega/config.lua` (it does NOT exist after installation, you can start just from copying data from `lua/vega/default_config.lua` and then modifying). If importing `config.lua` throws errors *(e.g. file does not exist)* then plugin uses `lua/vega/default_config.lua` (path provided relative to the plugin root directory).
+Plugin uses config file `lua/config/config.lua` (it does NOT exist after installation, you can start just from copying data from `lua/config/default_config.lua` and then modifying). If importing `config.lua` throws errors *(e.g. file does not exist)* then plugin uses `lua/config/default_config.lua` (path provided relative to the plugin root directory).
 
 
 ## Usage
